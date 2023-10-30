@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<!-- Coding by CodingLab || www.codinglabweb.com -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Website with Login & Registration Form</title>
+    <link rel="stylesheet" href="homepage.css" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' 
+    rel='stylesheet'>
+    <!-- Unicons -->
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+    />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <nav class="nav">
+        <a href="#" class="nav_logo">TRA</a>
+        <a ><i class='bx bxs-user-pin'></i></a>
+
+        <ul class="nav_items">
+          <li class="nav_item">
+            <a href="#" class="nav_link">Home</a>
+            <a href="#" class="nav_link">Product</a>
+            <a href="#" class="nav_link">Services</a>
+            <a href="#" class="nav_link">Contact</a>
+            <a href=""></a>
+          </li>
+        </ul>
+
+        <button class="button" id="form-open">Login</button>
+      </nav>
+    </header>
+
+    <!-- Home -->
+    <section class="home">
+      <div class="form_container">
+        <i class="uil uil-times form_close"></i>
+        <!-- Login From -->
+        <div class="form login_form">
+          <form id="form" action="index1.html">
+            <h2>Login</h2>
+
+            <div class="input_box">
+              <input type="email" placeholder="Enter your email" required />
+              <i class="uil uil-envelope-alt email"></i>
+            </div>
+            <div class="input_box">
+              <input
+                type="password"
+                placeholder="Enter your password"
+                required
+              />
+              <i class="uil uil-lock password"></i>
+              <i class="uil uil-eye-slash pw_hide"></i>
+            </div>
+
+            <div class="option_field">
+              <span class="checkbox">
+                <input type="checkbox" id="check" />
+                <label for="check">Remember me</label>
+              </span>
+              <a href="#" class="forgot_pw">Forgot password?</a>
+            </div>
+
+            <button class="button">Login Now</button>
+
+            <div class="login_signup">
+              Don't have an account? <a href="#" id="signup">Signup</a>
+            </div>
+          </form>
+        </div>
+      </div>
+
+        <!-- Signup From -->
+          <div class="form signup_form">
+          <form action="#">
+            <h2>Signup</h2>
+
+            <div class="input_box">
+              <input type="email" placeholder="Enter your email" required />
+              <i class="user_email"></i>
+            </div>
+            <div class="input_box">
+              <input type="password" placeholder="Create password" required />
+              <i class="uil uil-lock password"></i>
+              <i class="uil uil-eye-slash pw_hide"></i>
+            </div>
+            <div class="input_box">
+              <input type="password" placeholder="Confirm password" required />
+              <i class="uil uil-lock password"></i>
+              <i class="uil uil-eye-slash pw_hide"></i>
+            </div>
+
+            <button class="button">Signup Now</button>
+
+            <div class="login_signup">
+              Already have an account? <a href="#" id="login">Login</a>
+            </div>
+          </form>
+        </div> 
+      </div>
+    </section>
+    <script>
+         document.getElementById("form").addEventListener("login", (event) => {
+          event.preventDefault();
+
+          const user_email = document.getElementById("user_email");
+          const user_pass = document.getElementById("user_pass");
+        
+
+          var myHeaders = new Headers();
+          myHeaders.append("Content-Type", "application/json");
+
+          var raw = JSON.stringify({
+            name: "string",
+            age: 0,
+            paEmail: user_email.value,
+            password: user_pass.value,
+            accountbalace: 0,
+          });
+
+          var requestOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: raw,
+            redirect: "follow",
+          };
+
+          const getReqHeader = new Headers();
+           getReqHeader.append("Authorization", `Bearer ${localStorage.getItem("bearerToken")}`
+           );
+  
+          fetch(
+            "https://localhost:7032/api/Login?email=osama%40gmail.com&password=123",
+            requestOptions
+          )
+            .then((response) => response.text())
+            .then((result) => {
+              console.log(result);
+              localStorage.setItem("bearerToken", result);
+            })
+            .catch((error) => console.log("error", error));
+        });
+    </script>
+
+    <script src="homepage1.js"></script>
+  </body>
+</html>
